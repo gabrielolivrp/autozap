@@ -1,4 +1,4 @@
-import { Browser, Page } from 'playwright-core'
+import { BrowserContext, Page } from 'playwright-core'
 
 export type InstanceId = string
 
@@ -7,6 +7,6 @@ export type Status = 'CONNECTED' | 'DISCONNECTED'
 export type WhatsApp = {
   readonly id: InstanceId
   readonly page: Page
-  readonly browserInstance: Browser
+  readonly browser: BrowserContext
   readonly status: Status
 }

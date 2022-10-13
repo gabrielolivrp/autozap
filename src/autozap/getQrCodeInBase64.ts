@@ -1,20 +1,17 @@
 import { WhatsApp } from './types'
 
-async function getQrCodeInBase64(instance: WhatsApp): Promise<string> {
-  await instance.page.goto('/')
-
+export async function getQrCodeInBase64(instance: WhatsApp): Promise<string> {
   return new Promise(async (resolve, _reject) => {
     await instance.page.exposeFunction('resolveQrCode', resolve)
     await instance.page.evaluate(() => {
-      const mo = new MutationObserver(function () {
+      const mo = new MutationObserver(() => {
         const qr = document.querySelector('canvas')
         if (qr) {
-          ;(window as any).resolveQrCode(qr.toDataURL())
+          // @ts-ignore
+          resolveQrCode(qr.toDataURL())
         }
       })
       mo.observe(document.body, { childList: true, subtree: true })
     })
   })
 }
-
-export { getQrCodeInBase64 }
