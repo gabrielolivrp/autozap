@@ -3,24 +3,30 @@
 ### Single session
 
 ```typescript
-import { createInstance, sendText, getChats } from 'autozap'
+import { createInstance, sendMessage, getChats } from 'autozap'
 
-const instance = createInstance({
-  id: 'zap',
-  // more configs...
-})
+async function main() {
+  const instance = await createInstance({
+    id: 'zap',
+    // more configs...
+  })
 
-const chatId = '...'
-const response = sendText(instance.zap1, chatId, {
-  text: 'bla bla bla...',
-  simulateTyping: true,
-  // more params...
-})
+  const chats = await getChats(instance, {
+    onlyMyContact: true,
+    // more params...
+  })
 
-const chats = getChats(instance, {
-  onlyMyContact: true,
-  // more params...
-})
+  const chatId = '...'
+  const response = await sendMessage(instance, chatId, {
+    text: 'bla bla bla...',
+    simulateTyping: true,
+    // more params...
+  })
+}
+
+main()
+  .then(() => process.exit(0))
+  .catch((err) => console.error(err))
 ```
 
 ### Multiple sessions
@@ -28,41 +34,42 @@ const chats = getChats(instance, {
 ```typescript
 import {
   createInstance,
-  getQrCodeBase64,
-  sendText,
+  sendMessage,
   getChats,
-  healthCheck,
   onMessage,
+  WhatsApp,
 } from 'autozap'
 
 const makeInstance = (id) =>
   createInstance({
     id,
+    // more configs...
+  })
+
+async function main() {
+  const instances: Record<string, WhatsApp> = {
+    zap1: await makeInstance('zap1'),
+    zap2: await makeInstance('zap2'),
+  }
+
+  const chatId = '...'
+  const response = await sendMessage(instance.zap1, chatId, {
+    text: 'bla bla bla...',
+    simulateTyping: true,
     // more params...
   })
 
-const instances: Record<string, WhatsApp> = {
-  zap1: makeInstance('zap1'),
-  zap2: makeInstance('zap2'),
+  const chats = await getChats(instance.zap2, {
+    onlyMyContact: true,
+    // more params...
+  })
+
+  onMessage(instance.zap1, (chat, message) => {
+    console.log(message)
+  })
 }
 
-const qrCode = getQrCodeBase64(instance.zap1)
-
-const chatId = '...'
-const response = sendText(instance.zap1, chatId, {
-  text: 'bla bla bla...',
-  simulateTyping: true,
-  // more params...
-})
-
-const chats = getChats(instance.zap2, {
-  onlyMyContact: true,
-  // more params...
-})
-
-const status = healthCheck(instance.zap2)
-
-onMessage(instance.zap1, (chat, message) => {
-  console.log(message)
-})
+main()
+  .then(() => process.exit(0))
+  .catch((err) => console.error(err))
 ```
