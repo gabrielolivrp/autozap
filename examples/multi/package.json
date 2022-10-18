@@ -13,6 +13,7 @@
   "devDependencies": {
     "@types/node": "^18.8.3",
     "typescript": "^4.8.4",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "autozap": "file:../../dist"
   }
 }

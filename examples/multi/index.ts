@@ -1,3 +1,3 @@
-import { createInstance } from '../../src/index'
+import { createInstance } from 'autozap'
 
 console.log('multi')
