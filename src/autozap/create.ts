@@ -1,7 +1,7 @@
 import playwright from 'playwright'
-import { chromiumConfigs } from './configs'
 import { WhatsApp, InstanceId } from './types'
-import { injectWapi } from './wapi'
+import { chromiumConfigs } from './configs'
+import { injectApi } from './wapi'
 
 export type WhatsAppOptions = {
   id: InstanceId
@@ -20,9 +20,12 @@ export async function createInstance(
   )
 
   const page = browser.pages().at(0)!
-  await page.goto('https://web.whatsapp.com')
 
-  await injectWapi(page)
+  await page.goto('https://web.whatsapp.com', {
+    waitUntil: 'domcontentloaded',
+  })
+
+  await injectApi(page)
 
   return {
     page,

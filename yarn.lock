@@ -52,6 +52,11 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-18.8.3.tgz#ce750ab4017effa51aed6a7230651778d54e327c"
   integrity sha512-0os9vz6BpGwxGe9LOhgP/ncvYN5Tx1fNcd2TM3rD/aCGBkysb+ZWpXEocG24h6ZzOi13+VB8HndAQFezsSOw1w==
 
+"@wppconnect/wa-js@^2.13.2":
+  version "2.13.3"
+  resolved "https://registry.yarnpkg.com/@wppconnect/wa-js/-/wa-js-2.13.3.tgz#a46e54ddb2a2c57e1dc86c006cd5770eee2d17af"
+  integrity sha512-kMM1ttoJAE8DiSjAZxBNkY4NVBXyVjHsdj9zXIjHi3uFuysDvTI4Hs/3ck+cWmc/XGuEj7ABihojtjRNow/AYw==
+
 acorn-walk@^8.1.1:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/acorn-walk/-/acorn-walk-8.2.0.tgz#741210f2e2426454508853a2f44d0ab83b7f69c1"

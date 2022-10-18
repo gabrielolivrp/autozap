@@ -1,13 +1,4 @@
-/**
- * This script contains WAPI functions that need to be run in the context of the webpage
- */
-
-/**
- * Auto discovery the webpack object references of instances that contains all functions used by the WAPI
- * functions and creates the Store object.
- */
-
-if (!window.Store || !window.Store.Msg) {
+if (!window.Store) {
   ;(function () {
     function getStore(modules) {
       let foundCount = 0
@@ -324,11 +315,11 @@ if (!window.Store || !window.Store.Msg) {
       return window.Store
     }
     const parasite = `parasite${Date.now()}`
-    // webpackJsonp([], { [parasite]: (x, y, z) => getStore(z) }, [parasite]);
+
     if (typeof webpackJsonp === 'function')
       webpackJsonp([], { [parasite]: (x, y, z) => getStore(z) }, [parasite])
     else
-      webpackChunkbuild.push([
+      webpackChunkwhatsapp_web_client.push([
         [parasite],
         {},
         function (o, e, t) {
@@ -1204,17 +1195,8 @@ window.WAPI.sendMessageReturnId = async function (ch, body) {
 window.WAPI.sendMessage = async function (id, message) {
   if (id === 'status@broadcast') return 'Not able to send message to broadcast'
   let chat = WAPI.getChat(id)
-  if ((!chat && !id.includes('g')) || chat.msgs.models.length == 0) {
-    var contact = WAPI.getContact(id)
-    if (!contact || !contact.isMyContact) return 'Not a contact'
-    await Store.Chat.find(Store.Contact.get(id).id)
-    chat = WAPI.getChat(id)
-  }
   if (chat !== undefined) {
-    // return WAPI.sendMessageReturnId(chat,message).then(id=>{return id})
-    return await chat
-      .sendMessage(message)
-      .then((_) => chat.lastReceivedKey._serialized)
+    return await chat.sendMessage(message)
   }
   return false
 }

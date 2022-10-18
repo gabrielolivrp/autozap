@@ -12,7 +12,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "playwright": "^1.26.1"
+    "playwright": "^1.26.1",
+    "@wppconnect/wa-js": "^2.13.2"
   },
   "devDependencies": {
     "@types/node": "^18.8.3",
