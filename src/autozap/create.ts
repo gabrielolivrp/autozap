@@ -1,11 +1,13 @@
 import playwright from 'playwright'
 import { WhatsApp, InstanceId } from './types'
 import { chromiumConfigs } from './configs'
-import { injectApi } from './wapi'
+import { injectApi } from './api'
 
 export type WhatsAppOptions = {
   id: InstanceId
 }
+
+const DEBUG = false
 
 export async function createInstance(
   opitions: WhatsAppOptions
@@ -13,8 +15,8 @@ export async function createInstance(
   const browser = await playwright.chromium.launchPersistentContext(
     `./tmp/SESSION_${opitions.id}`,
     {
-      headless: false,
-      devtools: true,
+      headless: !DEBUG,
+      devtools: DEBUG,
       ...chromiumConfigs,
     }
   )
@@ -22,7 +24,7 @@ export async function createInstance(
   const page = browser.pages().at(0)!
 
   await page.goto('https://web.whatsapp.com', {
-    waitUntil: 'domcontentloaded',
+    waitUntil: 'networkidle',
   })
 
   await injectApi(page)

@@ -1,5 +1,11 @@
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms)
+  })
+}
+
 if (!window.Store) {
-  ;(function () {
+  ;(async function () {
     function getStore(modules) {
       let foundCount = 0
       let neededObjects = [
@@ -314,22 +320,36 @@ if (!window.Store) {
         }
       return window.Store
     }
-    const parasite = `parasite${Date.now()}`
 
-    if (typeof webpackJsonp === 'function')
-      webpackJsonp([], { [parasite]: (x, y, z) => getStore(z) }, [parasite])
-    else
-      webpackChunkwhatsapp_web_client.push([
-        [parasite],
-        {},
-        function (o, e, t) {
-          let modules = []
-          for (let idx in o.m) {
-            modules.push(o(idx))
-          }
-          getStore(modules)
-        },
-      ])
+    function injectParasite() {
+      const parasite = `parasite${Date.now()}`
+
+      if (typeof webpackJsonp === 'function') {
+        webpackJsonp([], { [parasite]: (x, y, z) => getStore(z) }, [parasite])
+      } else {
+        webpackChunkwhatsapp_web_client.push([
+          [parasite],
+          {},
+          function (o, e, t) {
+            let modules = []
+            for (let idx in o.m) {
+              modules.push(o(idx))
+            }
+            getStore(modules)
+          },
+        ])
+      }
+    }
+
+    while (true) {
+      try {
+        if (!document.querySelector('.QgIWN')) {
+          injectParasite()
+          return
+        }
+      } catch (e) {}
+      await sleep(1000)
+    }
   })()
 }
 

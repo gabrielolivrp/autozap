@@ -35,7 +35,7 @@ export async function injectApi(page: Page): Promise<void> {
         // @ts-ignore
         typeof window.Store !== 'undefined',
       {
-        timeout: 60000,
+        timeout: 70000,
       }
     )
     .catch(() => false)
