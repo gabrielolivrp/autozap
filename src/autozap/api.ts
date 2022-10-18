@@ -5,9 +5,7 @@ export async function injectApi(page: Page): Promise<void> {
   const wasInjected = await page
     .evaluate(
       () =>
-        // @ts-ignore
         typeof window.WAPI !== 'undefined' &&
-        // @ts-ignore
         typeof window.Store !== 'undefined'
     )
     .catch(() => false)
@@ -20,7 +18,6 @@ export async function injectApi(page: Page): Promise<void> {
     path: require.resolve('@wppconnect/wa-js'),
   })
 
-  // @ts-ignore
   await page.waitForFunction(() => window.WPP?.isReady)
 
   await page.addScriptTag({
@@ -30,9 +27,7 @@ export async function injectApi(page: Page): Promise<void> {
   await page
     .waitForFunction(
       () =>
-        // @ts-ignore
         typeof window.WAPI !== 'undefined' &&
-        // @ts-ignore
         typeof window.Store !== 'undefined',
       {
         timeout: 70000,

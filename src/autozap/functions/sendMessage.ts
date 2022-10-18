@@ -9,7 +9,6 @@ export async function sendMessage(
 ): Promise<void> {
   await instance.page.evaluate(
     ({ to, text }: { to: string; text: string }) =>
-      // @ts-ignore
       window.WAPI.sendMessage(to, text),
     { to, text: opitions.text }
   )
