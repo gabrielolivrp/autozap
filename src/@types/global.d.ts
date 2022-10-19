@@ -8,3 +8,5 @@ declare global {
   }
   const WPP: typeof wajs
 }
+
+export {}
