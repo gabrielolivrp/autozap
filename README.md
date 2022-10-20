@@ -53,18 +53,18 @@ async function main() {
   }
 
   const chatId = '...'
-  const response = await sendMessage(instance.zap1, chatId, {
+  const response = await sendMessage(instances.zap1, chatId, {
     text: 'bla bla bla...',
     simulateTyping: true,
     // more params...
   })
 
-  const chats = await getChats(instance.zap2, {
+  const chats = await getChats(instances.zap2, {
     onlyMyContact: true,
     // more params...
   })
 
-  onMessage(instance.zap1, (chat, message) => {
+  onMessage(instances.zap1, (chat, message) => {
     console.log(message)
   })
 }
