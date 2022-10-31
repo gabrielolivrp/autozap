@@ -6,3 +6,5 @@
 
 .DS_Store
 *.log
+old
+build_and_run.sh

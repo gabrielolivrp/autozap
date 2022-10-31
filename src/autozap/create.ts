@@ -13,7 +13,7 @@ export async function createInstance(
   opitions: WhatsAppOptions
 ): Promise<WhatsApp> {
   const browser = await playwright.chromium.launchPersistentContext(
-    `./tmp/SESSION_${opitions.id}`,
+    `./.autozap/SESSION_${opitions.id}`,
     {
       headless: !DEBUG,
       devtools: DEBUG,

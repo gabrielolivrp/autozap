@@ -1,8 +1,8 @@
-import { WhatsApp } from '../types'
+import { ChatId, WhatsApp } from '../types'
 
 export async function sendMessage(
   instance: WhatsApp,
-  to: string,
+  to: ChatId,
   opitions: {
     text: string
   }

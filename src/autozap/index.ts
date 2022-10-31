@@ -1,5 +1,7 @@
 export * from './create'
 export * from './getQrCodeInBase64'
+export * from './logout'
 export * from './asciiQrCode'
+export * from './getWhatsAppStatus'
 export * from './functions'
 export * from './types'

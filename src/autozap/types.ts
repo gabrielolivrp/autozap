@@ -2,6 +2,8 @@ import { BrowserContext, Page } from 'playwright'
 
 export type InstanceId = string
 
+export type ChatId = string
+
 export type Status = 'CONNECTED' | 'DISCONNECTED'
 
 export interface WhatsApp {

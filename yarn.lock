@@ -57,10 +57,10 @@
   resolved "https://registry.yarnpkg.com/@types/qrcode-terminal/-/qrcode-terminal-0.12.0.tgz#cee13a96db9346e3240e2128290465db56799961"
   integrity sha512-g0fQKl3IVnUePV8tLkiBTduxAVSZsXts444T2aMfjOEGxd7XoeSIs16/AmRe2NlcJLqbvsOBSXov7dKSo4wigA==
 
-"@wppconnect/wa-js@^2.13.2":
-  version "2.13.3"
-  resolved "https://registry.yarnpkg.com/@wppconnect/wa-js/-/wa-js-2.13.3.tgz#a46e54ddb2a2c57e1dc86c006cd5770eee2d17af"
-  integrity sha512-kMM1ttoJAE8DiSjAZxBNkY4NVBXyVjHsdj9zXIjHi3uFuysDvTI4Hs/3ck+cWmc/XGuEj7ABihojtjRNow/AYw==
+"@wppconnect/wa-js@^2.14.0":
+  version "2.14.0"
+  resolved "https://registry.yarnpkg.com/@wppconnect/wa-js/-/wa-js-2.14.0.tgz#d09c32b56cd1a7eab34589243798b311746cc47a"
+  integrity sha512-Kmah+d52SFS2JTmRtS1/1V4R2niGhqUIgKhyTXGyZW8YDWjwHHY5vyTLBzsz3zIiRRYOAB/obxV091CSkzVorw==
 
 acorn-walk@^8.1.1:
   version "8.2.0"

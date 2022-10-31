@@ -2,7 +2,7 @@
   "name": "autozap",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rimraf dist && tsc -p tsconfig.json && cp -R src/wapi dist"
@@ -12,7 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "playwright": "^1.26.1",
-    "@wppconnect/wa-js": "^2.13.2",
+    "@wppconnect/wa-js": "^2.14.0",
     "qrcode-terminal": "0.12.0"
   },
   "devDependencies": {
