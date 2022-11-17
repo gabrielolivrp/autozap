@@ -1,37 +1,30 @@
-import { resolve } from 'path'
 import { Page } from 'playwright'
 
 export async function injectApi(page: Page): Promise<void> {
-  const wasInjected = await page
-    .evaluate(
-      () =>
-        typeof window.WAPI !== 'undefined' &&
-        typeof window.Store !== 'undefined'
-    )
-    .catch(() => false)
-
-  if (wasInjected) {
-    return
-  }
-
   await page.addScriptTag({
     path: require.resolve('@wppconnect/wa-js'),
   })
 
-  await page.waitForFunction(() => window.WPP?.isReady)
-
-  await page.addScriptTag({
-    path: resolve(__dirname, '../wapi/debundle.js'),
-  })
-
   await page
     .waitForFunction(
-      () =>
-        typeof window.WAPI !== 'undefined' &&
-        typeof window.Store !== 'undefined',
+      () => typeof window.WPP !== 'undefined' && window.WPP.isReady,
       {
-        timeout: 70000,
+        timeout: 60000,
       }
     )
     .catch(() => false)
+
+  await page.addScriptTag({
+    path: require.resolve('venom-bot/dist/lib/wapi/wapi.js'),
+  })
+
+  await page.addScriptTag({
+    path: require.resolve('../wapi/wapi.js'),
+  })
+
+  // @ts-ignore
+  await page.waitForFunction(
+    () =>
+      typeof window.WAPI !== 'undefined' && typeof window.Store !== 'undefined'
+  )
 }
