@@ -1,7 +1,7 @@
 import {
   asciiQrCode,
   createInstance,
-  getQrCodeInBase64,
+  getAuthChallange,
   sendMessage,
   WhatsApp,
 } from 'autozap'
@@ -19,11 +19,11 @@ async function main() {
   }
 
   console.log('QRCODE 1')
-  let result = await getQrCodeInBase64(instances.zap1)
+  let result = await getAuthChallange(instances.zap1, { type: 'base64' })
   console.log(await asciiQrCode(result!.urlCode))
 
   console.log('QRCODE 2')
-  let result2 = await getQrCodeInBase64(instances.zap2)
+  let result2 = await getAuthChallange(instances.zap2, { type: 'base64' })
   console.log(await asciiQrCode(result2!.urlCode))
 }
 
