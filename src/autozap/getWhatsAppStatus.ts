@@ -5,7 +5,7 @@ type WhatsAppStatus = 'UNPAIRED' | 'PAIRING' | 'CONNECTED'
 export async function getWhatsAppStatus(
   instance: WhatsApp
 ): Promise<WhatsAppStatus> {
-  return await instance.page
+  return instance.page
     .waitForFunction(
       () => {
         if (
@@ -36,6 +36,6 @@ export async function getWhatsAppStatus(
         polling: 100,
       }
     )
-    .then(async (x: any) => await x.evaluate((a: any) => a))
+    .then((x: any) => x.evaluate((a: any) => a))
     .catch((e) => e)
 }

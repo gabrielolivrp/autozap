@@ -2,7 +2,6 @@ import {
   createInstance,
   getAuthChallange,
   getContacts,
-  sendMessage,
   asciiQrCode,
 } from 'autozap'
 
@@ -17,11 +16,11 @@ async function main() {
     id: 'zap',
   })
 
-  let result = await getAuthChallange(instance, { type: 'base64' })
-  while (result !== undefined) {
-    console.log(await asciiQrCode(result.urlCode))
+  let qrcode = await getAuthChallange(instance, { type: 'urlCode' })
+  while (qrcode !== undefined) {
+    console.log(await asciiQrCode(qrcode))
     await sleep(10000)
-    result = await getAuthChallange(instance, { type: 'base64' })
+    qrcode = await getAuthChallange(instance, { type: 'urlCode' })
   }
 
   await sleep(10000)
