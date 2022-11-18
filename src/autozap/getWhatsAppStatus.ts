@@ -36,7 +36,6 @@ export async function getWhatsAppStatus(
         polling: 100,
       }
     )
-    // @ts-ignore
-    .then(async (x) => await x.evaluate((a) => a))
+    .then(async (x: any) => await x.evaluate((a: any) => a))
     .catch((e) => e)
 }

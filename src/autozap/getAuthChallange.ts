@@ -1,11 +1,6 @@
 import { getWhatsAppStatus } from './getWhatsAppStatus'
 import { WhatsApp } from './types'
 
-export interface QrCodeResult {
-  base64: string
-  urlCode: string
-}
-
 export type ChallangeOptions = {
   type: 'base64' | 'urlCode'
 }
@@ -13,7 +8,7 @@ export type ChallangeOptions = {
 export async function getAuthChallange(
   instance: WhatsApp,
   options: ChallangeOptions
-): Promise<QrCodeResult | undefined> {
+): Promise<string | undefined> {
   const status = await getWhatsAppStatus(instance)
 
   if (status === 'UNPAIRED') {
