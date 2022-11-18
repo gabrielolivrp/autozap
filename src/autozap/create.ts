@@ -32,7 +32,6 @@ export async function createInstance(
   return {
     page,
     browser,
-    status: 'DISCONNECTED',
     ...opitions,
   }
 }

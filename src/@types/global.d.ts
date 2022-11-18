@@ -6,6 +6,7 @@ declare global {
     Store: any
     WAPI: any
   }
+  const WAPI: any
   const WPP: typeof wajs
 }
 

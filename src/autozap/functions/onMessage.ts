@@ -1,13 +1,13 @@
 import { WhatsApp } from '../types'
 
 interface OnMessageOptions {
-  only: 'chat' | 'group' | 'all'
-  onlyMessage: 'sent' | 'received' | 'all'
+  type: 'chat' | 'group' | 'both'
+  massages: 'sent' | 'received' | 'both'
 }
 
 const DEFAULT_OPTIONS: OnMessageOptions = {
-  only: 'all',
-  onlyMessage: 'all',
+  type: 'both',
+  massages: 'both',
 }
 
 export async function onMessage(
@@ -17,16 +17,19 @@ export async function onMessage(
 ): Promise<void> {
   await instance.page.exposeFunction('callback', callback)
   instance.page.evaluate((options) => {
-    window.WAPI.onAnyMessage((data: any) => {
+    WAPI.onAnyMessage((data: any) => {
       if (
-        (options.onlyMessage === 'all' ||
-          (options.onlyMessage === 'sent' && data.fromMe) ||
-          (options.onlyMessage === 'received' && !data.fromMe)) &&
-        (options.only === 'all' ||
-          (options.only === 'group' && data.isGroupMsg) ||
-          (options.only === 'chat' && !data.isGroupMsg))
+        options.massages === 'both' ||
+        (options.massages === 'sent' && data.fromMe) ||
+        (options.massages === 'received' && !data.fromMe)
       ) {
-        callback(data)
+        if (
+          options.type === 'both' ||
+          (options.type === 'group' && data.isGroupMsg) ||
+          (options.type === 'chat' && !data.isGroupMsg)
+        ) {
+          callback(data)
+        }
       }
     })
   }, options)

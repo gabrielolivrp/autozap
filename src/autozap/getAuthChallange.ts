@@ -6,13 +6,18 @@ export interface QrCodeResult {
   urlCode: string
 }
 
-export async function getQrCodeInBase64(
-  instance: WhatsApp
+export type ChallangeOptions = {
+  type: 'base64' | 'urlCode'
+}
+
+export async function getAuthChallange(
+  instance: WhatsApp,
+  options: ChallangeOptions
 ): Promise<QrCodeResult | undefined> {
   const status = await getWhatsAppStatus(instance)
 
   if (status === 'UNPAIRED') {
-    return await instance.page
+    const result = await instance.page
       .waitForFunction(() => {
         const qr = document.querySelector('canvas')
         const image = qr?.closest('[data-ref]')
@@ -27,5 +32,7 @@ export async function getQrCodeInBase64(
       // @ts-ignore
       .then(async (x) => await x.evaluate((a) => a))
       .catch((e) => e)
+
+    return result[options.type]
   }
 }

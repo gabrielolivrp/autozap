@@ -1,5 +1,5 @@
-import { WhatsApp } from './types'
 import fs from 'fs'
+import { WhatsApp } from './types'
 
 export async function logout(instance: WhatsApp) {
   try {

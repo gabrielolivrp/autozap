@@ -22,7 +22,6 @@ export async function injectApi(page: Page): Promise<void> {
     path: require.resolve('../wapi/wapi.js'),
   })
 
-  // @ts-ignore
   await page.waitForFunction(
     () =>
       typeof window.WAPI !== 'undefined' && typeof window.Store !== 'undefined'
