@@ -7,10 +7,13 @@ export async function sendMessage(
     text: string
   }
 ): Promise<void> {
-  await instance.page.evaluate(({ to, text }) => WAPI.sendMessage(to, text), {
-    to,
-    ...options,
-  })
+  await instance.page.evaluate(
+    ({ to, text }) => WPP.chat.sendTextMessage(to, text, { createChat: true }),
+    {
+      to,
+      ...options,
+    }
+  )
 
-  await instance.page.waitForTimeout(1000)
+  await instance.page.waitForTimeout(2000)
 }

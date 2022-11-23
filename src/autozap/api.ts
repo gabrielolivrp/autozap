@@ -1,6 +1,19 @@
 import { Page } from 'playwright'
 
 export async function injectApi(page: Page): Promise<void> {
+  const wasInjected = await page
+    .evaluate(() => {
+      return (
+        typeof window.WAPI !== 'undefined' &&
+        typeof window.Store !== 'undefined'
+      )
+    })
+    .catch(() => false)
+
+  if (wasInjected) {
+    return
+  }
+
   await page.addScriptTag({
     path: require.resolve('@wppconnect/wa-js'),
   })
