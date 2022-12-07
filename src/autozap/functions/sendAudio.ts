@@ -5,8 +5,15 @@ export async function sendAudio(
   to: ChatId,
   base64: string
 ): Promise<any> {
-  return instance.page.evaluate(({ to, base64 }) => WAPI.sendPtt(base64, to), {
-    to,
-    base64,
-  })
+  return instance.page.evaluate(
+    ({ to, base64 }) =>
+      WPP.chat.sendFileMessage(to, base64, {
+        type: 'audio',
+        isPtt: true,
+      }),
+    {
+      to,
+      base64,
+    }
+  )
 }

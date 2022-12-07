@@ -27,6 +27,8 @@ export async function injectApi(page: Page): Promise<void> {
     )
     .catch(() => false)
 
+  await page.evaluate(() => WPP.conn.setKeepAlive(true))
+
   await page.addScriptTag({
     path: require.resolve('venom-bot/dist/lib/wapi/wapi.js'),
   })

@@ -1,13 +1,13 @@
 import { getWhatsAppStatus } from './getWhatsAppStatus'
 import { WhatsApp } from './types'
 
-export type ChallangeOptions = {
+type Options = {
   type: 'base64' | 'urlCode'
 }
 
 export async function getAuthChallange(
   instance: WhatsApp,
-  options: ChallangeOptions
+  options: Options
 ): Promise<string | undefined> {
   const status = await getWhatsAppStatus(instance)
 

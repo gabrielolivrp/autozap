@@ -3,15 +3,13 @@ import { WhatsApp, InstanceId } from './types'
 import { chromiumConfigs } from './configs'
 import { injectApi } from './api'
 
-export type WhatsAppOptions = {
+export type Options = {
   id: InstanceId
 }
 
 const DEBUG = false
 
-export async function createInstance(
-  opitions: WhatsAppOptions
-): Promise<WhatsApp> {
+export async function createInstance(opitions: Options): Promise<WhatsApp> {
   const browser = await playwright.chromium.launchPersistentContext(
     `./.autozap/SESSION_${opitions.id}`,
     {
